@@ -20,6 +20,11 @@ angular.module("app", ["ngRoute",'angularUtils.directives.dirPagination'])
                 controller: "orderController",
                 controllerAs: "vm",
                 templateUrl: "contacto"
+            })
+            .when("/categorias", {
+                controller: "categoryController",
+                controllerAs: "vm",
+                templateUrl: "categorias"
             });
     })
     .controller('mainController', function() {

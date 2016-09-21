@@ -6,6 +6,7 @@ var mongoose 	  = require('mongoose');
 var User 	  = require('./models/user');
 var usersController = require('./routes/users');
 var itemsController = require('./routes/items');
+var categoriesController = require('./routes/categories');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -40,6 +41,26 @@ app.get('/listarItems', function(req, res){
         }       
     });
 });
+
+app.get('/listarCategorias', function(req, res){
+   categoriesController.mostrar(null, function (err, categories) {
+        if (err){
+          res.send({ 'error': true, 'err': error});
+        }else{
+          res.send(categories);
+        }       
+    });
+});
+
+app.post('/guardarCategoria', function (req, res) {
+    categoriesController.store(req.query, function (err, cat) {
+        if (err){
+          res.send({ 'error': true, 'err': error});
+        }else{
+          res.send(cat);
+        }       
+    });    
+  });
 
 app.post('/guardarItem', function (req, res) {
     itemsController.store(req.query, function (err, item) {
@@ -118,6 +139,10 @@ app.get('/users', function(req, res){
 
 app.get('/items', function(req, res){
    res.sendFile(__dirname +'/views/items/index.html');
+});
+
+app.get('/categorias', function(req, res){
+   res.sendFile(__dirname +'/views/categories/index.html');
 });
 
 app.get('/contacto', function(req, res){
