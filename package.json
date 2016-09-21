@@ -1,0 +1,21 @@
+{
+  "name": "restapp",
+  "version": "1.0.0",
+  "description": "Sistema web/movil de atencion al cliente",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "author": "osalomon",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "mongoose": "^4.6.0",
+    "sweetalert2": "^4.2.7"
+  },
+  "devDependencies": {
+    "nodemon": "^1.10.2"
+  }
+}

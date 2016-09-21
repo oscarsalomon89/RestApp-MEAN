@@ -1,0 +1,83 @@
+<h1> ITEMS </h1>
+<div id="mensaje" style="display:none;" class="alert alert-success">
+  <button type="button" class="close" onclick="cerrar()"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+  <h4>
+    <div style="display:inline;" id="success_form"></div>
+  </h4>
+</div>
+  <button value="" id="usuario" class="btn btn-primary" ng-click="vm.nuevoItem();">
+  <i class="icon-plus"></i> Crear Item</button>
+<br>
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" style="color:black;" id="myModalLabel"></h4>
+      </div>
+      <div class="modal-body">    
+        <div class='errors_form'></div>
+    <form id="form">
+    <div class="form-group">
+       Nombre
+        <input ng-model="vm.name" type="text" value="" class='form-control' placeholder='Nombre del item'>
+    </div>
+    <div class="form-group">
+      Descripcion
+      <input ng-model="vm.description" type="text" value="" class='form-control' placeholder='Descripcion del item'>
+    </div>
+    <div class="form-group">
+      Precio
+      <input type="text" ng-model="vm.price" value="" class='form-control' placeholder='Precio'>
+     </div>
+       <div class="modal-footer">
+      <button type="button" ng-click="vm.guardarItem()" class="btn btn-primary">Guardar Item</button>     
+      </div>
+    </form> 
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+            <div class="col-xs-4">
+              <h3>Items Page: {{ vm.currentPage }}</h3>
+            </div>
+            <div class="col-xs-4">
+              <label for="search">Search:</label>
+              <input ng-model="vm.q" id="search" class="form-control" placeholder="Filter text">
+            </div>
+            <div class="col-xs-4">
+              <label for="search">items per page:</label>
+              <input type="number" min="1" max="20" class="form-control" ng-model="vm.pageSize">
+            </div>
+          </div>
+<br>
+<div class="widget-content-white glossed" ng-init="vm.cargarItems()">
+    <table class="table">
+            <thead>
+               <tr>
+                  <th> Nombre </th>
+                  <th> Descripcion </th>
+                  <th> Precio </th>
+                  <th> </th>
+                  <th> </th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr dir-paginate="item in vm.items | filter:vm.q | itemsPerPage: vm.pageSize">
+                   <td> {{item.name}} </td>
+                   <td> {{item.description}} </td>
+                   <td> {{item.price}} </td>
+                   <td> <a href="javascript:void(0);" class="btn btn-info" ng-click="vm.recuperarItem(item._id)"> Editar </a> </td>
+                   <td> <a href="javascript:void(0);" class="btn btn-danger" ng-click="vm.eliminarItem(item._id)"> Eliminar </a> </td>
+                 </tr>
+              </tbody>
+           </table>
+      <div class="other-controller">
+          <div class="text-center">
+          <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="angular-utils-pagination/dirPagination.tpl.html">
+        </dir-pagination-controls>
+          </div>
+        </div>
+</div>
