@@ -1,5 +1,4 @@
 var Category = require('../models/category');
-
 /* GET categorys listing. */
 
 exports.store = function(req,callback){

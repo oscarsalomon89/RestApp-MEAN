@@ -8,6 +8,7 @@ exports.store = function(req,callback){
       var item = new Item({
          name: req.name,
          description: req.description,
+         category: req.category,
          price: req.price
       });
       item.save(function(error,item){
@@ -26,6 +27,7 @@ exports.store = function(req,callback){
             var item = documento;
             item.name = req.name;
             item.description = req.description;
+            item.category = req.category;
             item.price = req.price;
 
             item.save(function(error, documento){

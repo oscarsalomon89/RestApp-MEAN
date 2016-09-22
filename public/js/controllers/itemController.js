@@ -7,13 +7,34 @@ angular.module("app")
    vm._id = null;
    vm.name = '';
    vm.description = '';
+   vm.category = '';
    vm.price = '';
    vm.items = [];
+   vm.categories = [];
+   
+   cargarCategorias(); 
+
    $('#estadisticas').removeClass("active");
    $('#user').removeClass("active");
    $('#order').removeClass("active");
    $('#item').addClass("active");
   
+   function cargarCategorias(){
+      $http({
+         method: 'GET', url: '/listarCategorias'
+      }).
+      success(function(data) {
+         if(typeof(data) == 'object'){
+            vm.categories = data;
+         }else{
+            alert('Error al intentar recuperar los clientes.');
+         }
+      }).
+      error(function() {
+         alert('Error al intentar recuperar los clientes.');
+      });
+   };
+
    vm.cargarItems = function(){
       $http({
          method: 'GET', url: '/listarItems'
@@ -37,6 +58,7 @@ angular.module("app")
          params: {
             name: vm.name,
             description: vm.description,
+            category: vm.category,
             price: vm.price,
             _id: vm._id
          }
@@ -69,6 +91,7 @@ angular.module("app")
             vm._id = data._id;
             vm.name = data.name;
             vm.description = data.description;
+            vm.category = data.category;
             vm.price = data.price;
          }else{
             alert('Error al intentar recuperar el cliente.');
@@ -124,6 +147,7 @@ angular.module("app")
 
     vm.nuevoItem = function() {
       vm._id = null;
+      vm.category = '';
 	   $('#myModal').modal(); 
 	   $('#form #logOculto').show();
 	   $('.errors_form').html("");

@@ -46,7 +46,7 @@ angular.module("app")
             name: vm.name,
             address: vm.address,
             phone: vm.phone,
-            rol: vm.id_rol,
+            rol: vm.rol,
             email: vm.password,
             _id: vm._id
          }
@@ -81,7 +81,7 @@ angular.module("app")
             vm.name = data.name;
             vm.address = data.address;
             vm.phone = data.phone;
-            vm.id_rol = data.id_rol;
+            vm.rol = data.rol;
          }else{
             alert('Error al intentar recuperar el cliente.');
          } 
@@ -133,6 +133,7 @@ angular.module("app")
       vm.name = '';
       vm.address = '';
       vm.phone = '';
+      vm.rol = '';
       vm.password = '';
    };
 

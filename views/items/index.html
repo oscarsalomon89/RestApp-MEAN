@@ -28,6 +28,14 @@
       <input ng-model="vm.description" type="text" value="" class='form-control' placeholder='Descripcion del item'>
     </div>
     <div class="form-group">
+      Categoria
+      <select class="form-control" ng-model="vm.category">
+          <option ng-repeat="category in vm.categories" value="{{category._id}}">
+           {{category.name}}
+          </option>
+      </select>
+    </div>
+    <div class="form-group">
       Precio
       <input type="text" ng-model="vm.price" value="" class='form-control' placeholder='Precio'>
      </div>
