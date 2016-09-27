@@ -40,13 +40,23 @@ exports.store = function(req,callback){
 exports.mostrar = function(id,callback){
 	if(id == null){
 		//Obtiene todos los usuarios
-		Category.find({}, function(error,categories){
+      Category
+      .find()
+      .populate('item')
+      .exec(function(error,items){
+         if(error){
+            return callback(error, null);
+         }else{
+            return callback(null, items);
+         }
+      });
+		/*Category.find({}, function(error,categories){
 	      if(error){
 	         return callback(error, null);
 	      }else{
 	         return callback(null, categories);
 	      }
-	   });
+	   });*/
 	}else{
 		//Obtiene el usuario por id
 		Category.findById(id, function(error, category){

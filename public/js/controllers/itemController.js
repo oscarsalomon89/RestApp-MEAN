@@ -51,6 +51,31 @@ angular.module("app")
       });
    };
 
+   vm.obtenerItemsPorCat = function(cat){
+      if(cat == 0){
+         vm.cargarItems();
+         return;
+      }
+
+      $http({
+         method: 'GET',
+         url: '/listarItemsPorCat',
+         params: {
+            category: cat
+         }
+      }).
+      success(function(data) {
+         if(typeof(data) == 'object'){
+            vm.items = data;
+         }else{
+            alert('Error al intentar recuperar los clientes.');
+         }
+      }).
+      error(function() {
+         alert('Error al intentar recuperar los clientes.');
+      });
+   };
+
    vm.guardarItem = function() {
       $http({
          method: 'POST',

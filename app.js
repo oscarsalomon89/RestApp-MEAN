@@ -3,10 +3,10 @@ var app = express();
 var http = require('http').Server(app);
 var bodyParser 	= require('body-parser');
 var mongoose 	  = require('mongoose');
-var User 	  = require('./models/user');
-var usersController = require('./routes/users');
-var itemsController = require('./routes/items');
-var categoriesController = require('./routes/categories');
+
+var usersController       = require('./routes/users');
+var itemsController       = require('./routes/items');
+var categoriesController  = require('./routes/categories');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -38,6 +38,16 @@ app.get('/listarItems', function(req, res){
           res.send({ 'error': true, 'err': error});
         }else{
           res.send(users);
+        }       
+    });
+});
+
+app.get('/listarItemsPorCat', function(req, res){
+   itemsController.mostrarPorCategoria(req.query.category,function (err, items) {
+        if (err){
+          res.send({ 'error': true, 'err': error});
+        }else{
+          res.send(items);
         }       
     });
 });

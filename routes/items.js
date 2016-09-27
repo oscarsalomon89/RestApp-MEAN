@@ -1,4 +1,4 @@
-var Item 	= require('../models/item');
+var Item 	 = require('../models/item');
 
 /* GET items listing. */
 
@@ -44,14 +44,17 @@ exports.store = function(req,callback){
 
 exports.mostrar = function(id,callback){
 	if(id == null){
-		//Obtiene todos los usuarios
-		Item.find({}, function(error,items){
-	      if(error){
-	         return callback(error, null);
-	      }else{
-	         return callback(null, items);
-	      }
-	   });
+		//Obtiene todos los items con su categoria
+      Item
+      .find()
+      .populate('category','name')
+      .exec(function(error,items){
+         if(error){
+            return callback(error, null);
+         }else{
+            return callback(null, items);
+         }
+      });
 	}else{
 		//Obtiene el usuario por id
 		Item.findById(id, function(error, item){
@@ -62,6 +65,20 @@ exports.mostrar = function(id,callback){
 	      }
 	   });
 	}	
+};
+
+exports.mostrarPorCategoria = function(cat,callback){
+      //Obtiene todos los items con su categoria
+      Item
+      .find({'category':cat})
+      .populate('category','name')
+      .exec(function(error,items){
+         if(error){
+            return callback(error, null);
+         }else{
+            return callback(null, items);
+         }
+      });  
 };
 
 exports.eliminar = function (id,callback){
